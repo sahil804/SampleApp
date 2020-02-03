@@ -1,5 +1,6 @@
 package com.example.sampleapp.data.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -10,7 +11,7 @@ import io.reactivex.Single
 interface RowsDao {
 
     @get:Query("SELECT * FROM Rows")
-    val all: Single<List<Rows>>
+    val all: LiveData<List<Rows>>
 
     @Insert
     fun insertAll(vararg rows: Rows)

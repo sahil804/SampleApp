@@ -1,12 +1,8 @@
 package com.example.sampleapp.di
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.sampleapp.data.RowsRepository
-import com.example.sampleapp.data.database.AppDatabase
-import com.example.sampleapp.data.network.ApiClient
-import com.example.sampleapp.data.network.ApiInterface
+import com.example.sampleapp.data.repository.RowsRepository
 import com.example.sampleapp.ui.MainViewModel
 import javax.inject.Inject
 

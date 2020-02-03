@@ -2,10 +2,7 @@ package com.example.sampleapp
 
 import android.app.Activity
 import android.app.Application
-import android.util.Log
-import com.example.sampleapp.di.component.AppComponent
 import com.example.sampleapp.di.component.DaggerAppComponent
-import com.example.sampleapp.di.module.AppModule
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector

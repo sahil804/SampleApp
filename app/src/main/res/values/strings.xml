@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SampleApp</string>
+    <string name="unknown">Unknown Title</string>
+    <string name="retry">Retry</string>
 </resources>
