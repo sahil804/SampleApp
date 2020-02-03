@@ -17,11 +17,17 @@ class NetworkRepository @Inject constructor (val apiInterface: ApiInterface) {
 
 
     var liveDataTile: MutableLiveData<String> = MutableLiveData()
+
+    /**
+     * Get the list of the Rows from the API
+     */
     fun getRows():LiveData<Resource<List<Rows>>> {
+        // Rather than using LiveDataInterceptor, creating instance of liveData and updating it
         var liveData: MutableLiveData<Resource<List<Rows>>> = MutableLiveData()
         apiInterface.getPosts().enqueue(object : Callback<JsonModel> {
             override fun onFailure(call: Call<JsonModel>, t: Throwable) {
                 val rowsList: List<Rows> = ArrayList()
+                // This will give title as offline
                 liveData.value = Resource.error(t.toString(), rowsList)
                 liveDataTile.value = "Offline"
             }

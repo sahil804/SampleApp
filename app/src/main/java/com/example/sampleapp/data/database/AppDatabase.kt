@@ -10,6 +10,7 @@ import com.example.sampleapp.data.models.Rows
     entities = [Rows::class],
     version = 1
 )
+//Not using this class, as Room instance is created by Dagger
 abstract class AppDatabase : RoomDatabase(){
     abstract fun rowsDao(): RowsDao
 

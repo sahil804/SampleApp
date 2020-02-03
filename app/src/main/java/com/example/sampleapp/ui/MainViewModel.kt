@@ -30,10 +30,16 @@ class MainViewModel @Inject constructor(val rowsRepo: RowsRepository) : ViewMode
         reloadRows()
     }
 
+    /**
+     * This gets called from Swipe refresh and retry button
+     */
     fun reloadRows() {
         reloadTrigger.value = true
     }
 
+    /**
+     * This gets called from toolbar menu
+     */
     fun clearRows() {
         reloadTrigger.value = false
     }

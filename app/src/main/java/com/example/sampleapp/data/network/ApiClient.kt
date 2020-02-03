@@ -8,6 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
+    //Not using this class, Retrofit instance is added through dagger
     private val API_BASE_URL = "https://dl.dropboxusercontent.com"
 
     private var servicesApiInterface:ApiInterface?=null

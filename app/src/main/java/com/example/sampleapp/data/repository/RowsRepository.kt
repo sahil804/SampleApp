@@ -20,6 +20,12 @@ class RowsRepository @Inject constructor(
     private var liveData:MutableLiveData<Resource<List<Rows>>> = MutableLiveData()
 
 
+    /**
+     *  This function uses NetworkBoundResource, which tries
+     *  to return the data from db first, and then checks for
+     *  server and update the data
+     */
+
     fun loadRows(): LiveData<Resource<List<Rows>>> {
         return object : NetworkBoundResource<List<Rows>, List<Rows>>(appExecutors) {
             override fun saveCallResult(item: List<Rows>) {
@@ -45,6 +51,10 @@ class RowsRepository @Inject constructor(
         }.asLiveData()
     }
 
+    /**
+     * Clear the entries from DataBase and sends clearData Event
+     */
+
     fun clearRows(): LiveData<Resource<List<Rows>>> {
         appExecutors.diskIO().execute {
             db.rowsDao().deleteAll
@@ -52,6 +62,10 @@ class RowsRepository @Inject constructor(
         liveData.value = Resource.error("cleared Data", ArrayList())
         return liveData
     }
+
+    /**
+     * Get the liveData title
+     */
 
     fun getTitle():LiveData<String> {
         return networkRepository.liveDataTile

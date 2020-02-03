@@ -10,7 +10,8 @@ object ImageBindingAdapter {
     @JvmStatic
     @BindingAdapter("android:src")
     fun setImage(view:ImageView, url:String) {
-        if(url.equals("Unknown Title")) {
+        // The Json has null values for HREF, so displaying default image
+        if(url == "Unknown Title") {
             Glide.with(view.context)
                 .load(R.drawable.ic_launcher_foreground)
                 .into(view)
