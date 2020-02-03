@@ -59,7 +59,9 @@ abstract class NetworkBoundResource<ResultType, RequestType>
             } else if (response.status == Status.ERROR) {
                 onFetchFailed()
                 result.addSource(dbSource) { newData ->
-                    setValue(Resource.error("Something went wrong", newData))
+                    if(newData != null && newData is List<*> && newData.size > 0)
+                        setValue(Resource.offline(newData))
+                    else setValue(Resource.error("Something went wrong", newData))
                 }
             }
 

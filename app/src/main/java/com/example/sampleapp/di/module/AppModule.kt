@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.room.Room
 import com.example.sampleapp.data.database.AppDatabase
 import com.example.sampleapp.data.network.ApiInterface
-import com.example.sampleapp.utils.Utils
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -24,22 +23,6 @@ class AppModule {
         ).build()
     }
 
-//    @Provides
-//    @Singleton
-//    fun providesRepository(api: ApiInterface, db: AppDatabase): RowsRepository {
-//        return RowsRepository(api, db)
-//    }
-
-//    @Provides
-//    @Singleton
-//    fun providesContext(application: Application): Context {
-//        return application.applicationContext
-//    }
-
-    @Provides
-    @Singleton
-    fun provideUtils(application: Application): Utils = Utils(application)
-
     private val API_BASE_URL = "https://dl.dropboxusercontent.com"
     @Provides
     @Singleton
@@ -57,4 +40,3 @@ class AppModule {
             .build()
     }
 }
-
