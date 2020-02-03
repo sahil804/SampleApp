@@ -23,25 +23,22 @@ class RowsRepository @Inject constructor(
     fun loadRows(): LiveData<Resource<List<Rows>>> {
         return object : NetworkBoundResource<List<Rows>, List<Rows>>(appExecutors) {
             override fun saveCallResult(item: List<Rows>) {
-                Log.d(TAG, "saveCallResult: "+Thread.currentThread().name)
-                Log.d(TAG, "rows: " + item)
                 db.rowsDao().deleteAll
                 db.rowsDao().insertAll(*item.toTypedArray())
 
             }
 
             override fun shouldFetch(data: List<Rows>?): Boolean {
+                // For the demo App, fetching everytime from n/w
                 //return data == null || data.isEmpty()
                 return true
             }
 
             override fun loadFromDb(): LiveData<List<Rows>> {
-                Log.d(TAG, "loadFromDb: "+Thread.currentThread().name)
                 return db.rowsDao().all
             }
 
             override fun createCall(): LiveData<Resource<List<Rows>>> {
-                Log.d(TAG, "createCall: "+Thread.currentThread().name)
                 return networkRepository.getRows()
             }
 
@@ -49,7 +46,6 @@ class RowsRepository @Inject constructor(
     }
 
     fun clearRows(): LiveData<Resource<List<Rows>>> {
-        Log.d(TAG, "clearRows: "+Thread.currentThread().name)
         appExecutors.diskIO().execute {
             db.rowsDao().deleteAll
         }
