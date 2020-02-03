@@ -32,7 +32,6 @@ class RowListAdapter() : RecyclerView.Adapter<RowListAdapter.ViewHolder>() {
     }
 
     fun updateList(rows: List<Rows>) {
-        Log.d("Sahil"," *** "+rows.size + " "+Thread.currentThread().name)
         rowList = rows
         notifyDataSetChanged()
     }

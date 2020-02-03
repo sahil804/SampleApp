@@ -23,12 +23,14 @@ class RowsRepository @Inject constructor(
         return object : NetworkBoundResource<List<Rows>, List<Rows>>(appExecutors) {
             override fun saveCallResult(item: List<Rows>) {
                 Log.d(TAG, "rows: " + item)
+                db.rowsDao().deleteAll
                 db.rowsDao().insertAll(*item.toTypedArray())
 
             }
 
             override fun shouldFetch(data: List<Rows>?): Boolean {
-                return data == null || data.isEmpty()
+                //return data == null || data.isEmpty()
+                return true
             }
 
             override fun loadFromDb(): LiveData<List<Rows>> {
@@ -42,42 +44,5 @@ class RowsRepository @Inject constructor(
 
         }.asLiveData()
     }
-
-//    fun getRows():Observable<List<Rows>> {
-//        if(!util.isConnectedToNetwork()) {
-//            return getRowsFromDatabase()
-//        }
-//        return Observable.concatArrayEager(getRowsFromNetwork(), getRowsFromDatabase())
-//
-//
-//
-//
-////        return Observable.fromCallable { rowsDao.all }
-////            .concatMap { rowsList ->
-////                if (rowsList.isEmpty()) {
-////                    Log.d(TAG, " is Empty")
-////                    apiInterface.getPosts()
-////                        .concatMap {
-////                            Log.d("Sahil", " --> " + it.rows)
-////                            rowsDao.insertAll(*it.rows.toTypedArray())
-////                            Observable.just(it.rows)
-////                        }
-////                } else Observable.just(rowsList)
-////            }
-//    }
-
-    private fun getRowsFromNetwork(): Observable<List<Rows>>? {
-//        return apiInterface.getPosts()
-//            .concatMap {
-//                db.rowsDao().insertAll(*it.rows.toTypedArray())
-//                Observable.just(it.rows)
-//            }
-        return null
-
-    }
-
-//    private fun getRowsFromDatabase():Observable<List<Rows>> {
-//        return db.rowsDao().all.toObservable()
-//    }
 
 }
